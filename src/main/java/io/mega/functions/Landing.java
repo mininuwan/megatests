@@ -13,4 +13,12 @@ public class Landing {
         landingPage.loginToApplication();
     }
 
+    public static void onlyEnterUserCredentials(){
+        landingPage.onlyEnterUserCredentials();
+    }
+
+    public static void submitUserCredentials(){
+        landingPage.submitUserCredentials();
+    }
+
 }

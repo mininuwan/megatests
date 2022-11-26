@@ -25,4 +25,16 @@ public class LandingPage extends BaseAutomationPage {
         getDriver().findElement(btnLogin).click();
         wait_MiliSec(10000);
     }
+
+    public void onlyEnterUserCredentials(){
+        getDriver().findElement(loginBtn).click();
+        wait_MiliSec(10000);
+        getDriver().findElement(inputLoginName).sendKeys("mininuwan@gmail.com");
+        getDriver().findElement(inputLoginPassword).sendKeys("Qwer1234@a1");
+    }
+
+    public void submitUserCredentials(){
+        getDriver().findElement(btnLogin).click();
+        wait_MiliSec(10000);
+    }
 }

@@ -32,4 +32,16 @@ public class Home {
     public static boolean isRestoredFileDisplayedInHome(){
         return homePage.isRestoredFileDisplayedInHome();
     }
+
+    public static void CreatesANewTextFile(){
+        homePage.CreatesANewTextFile();
+    }
+
+    public static void addFileContent(){
+        homePage.addFileContent();
+    }
+
+    public static void saveAndCloseNewFile(){
+        homePage.saveAndCloseNewFile();
+    }
 }

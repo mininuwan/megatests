@@ -19,6 +19,13 @@ public class HomePage extends BaseAutomationPage {
     private static By optRestore = By.xpath("//a[@class='dropdown-item revert-item']");
     private static By restoredFile = By.xpath(xPathFileName);
 
+    private static By rightClickBody = By.xpath("//div[@class='megaList-content']");
+    private static By optNewFile = By.xpath("//span[text()='New text file']");
+    private static By inputNewFileName = By.xpath("//input[@name='dialog-new-file']");
+    private static By btnCreate = By.xpath("//button[@class='mega-button positive fm-dialog-new-file-button create-file']");
+
+    private static By btnSave = By.xpath("//button[@class='mega-button positive gradient save-btn']");
+    private static By btnCloseTextArea = By.xpath("(//button[@class='close-btn']) [2]");
 
     public boolean isBtnBinMenuDisplayed(){
         return getDriver().findElement(btnBinMenu).isDisplayed();
@@ -65,5 +72,35 @@ public class HomePage extends BaseAutomationPage {
         return getDriver().findElement(restoredFile).isDisplayed();
     }
 
+    public void CreatesANewTextFile(){
+        Actions actions = new Actions(getDriver());
+        actions.contextClick(getDriver().findElement(rightClickBody)).perform();
+        wait_MiliSec(5000);
+        if(getDriver().findElement(optNewFile).isDisplayed()){
+            getDriver().findElement(optNewFile).click();
+            wait_MiliSec(5000);
+
+            String fileName = "a";
+            getDriver().findElement(inputNewFileName).sendKeys(fileName);
+            wait_MiliSec(3000);
+
+            getDriver().findElement(btnCreate).click();
+            wait_MiliSec(10000);
+        }
+    }
+
+    public void addFileContent(){
+        String txtBodyContent = "megatesting";
+        new Actions(getDriver()).sendKeys(txtBodyContent).perform();
+        wait_MiliSec(5000);
+    }
+
+    public void saveAndCloseNewFile(){
+        getDriver().findElement(btnSave).click();
+        wait_MiliSec(10000);
+
+        getDriver().findElement(btnCloseTextArea).click();
+        wait_MiliSec(10000);
+    }
 
 }
