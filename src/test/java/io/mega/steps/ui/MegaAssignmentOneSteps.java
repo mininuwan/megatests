@@ -5,6 +5,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.mega.common.Constants;
+import io.mega.functions.Home;
+import io.mega.functions.Landing;
 import io.mega.ui.BaseAutomationPage;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Assertions;
@@ -30,7 +32,7 @@ public class MegaAssignmentOneSteps extends BaseAutomationPage {
     public void theUserEntersUsernameAndPassword() {
         WebElement loginBtn = getDriver().findElement(By.xpath("(//button[@class='mega-button top-login-button'])[1]"));
         loginBtn.click();
-        wait_MiliSec(5000);
+        wait_MiliSec(10000);
 
         WebElement inputLoginName = getDriver().findElement(By.xpath("//input[@name='login-name2']"));
         WebElement inputLoginPassword = getDriver().findElement(By.xpath("//input[@name='login-password2']"));
@@ -103,5 +105,32 @@ public class MegaAssignmentOneSteps extends BaseAutomationPage {
         WebElement savedFile = getDriver().findElement(By.xpath(xPathFileName));
         Assertions.assertTrue(savedFile.isDisplayed());
         wait_MiliSec(3000);
+    }
+
+    @Given("The user is already logged in")
+    public void theUserIsAlreadyLoggedIn() {
+        wait_MiliSec(4000);
+        getDriver().get(Constants.ASSIGNMENT_ONE_LANDING_PAGE);
+        wait_MiliSec(10000);
+
+        Assertions.assertTrue(Landing.isLandingPageBannerDisplayed());
+        Landing.loginToApplication();
+        Assertions.assertTrue(Home.isBtnBinMenuDisplayed());
+    }
+
+    @When("The user finds the text file")
+    public void theUserFindsTheTextFile() {
+        Assertions.assertTrue(Home.isTextFileDisplayedInHome());
+    }
+
+    @And("The user delets the text file")
+    public void theUserDeletsTheTextFile() {
+        Home.deleteTextFile();
+    }
+
+    @Then("Verify deleted file moves to the Rubbish Bin")
+    public void verifyDeletedFileMovesToTheRubbishBin() {
+        Home.navigateToRubbishBin();
+        Assertions.assertTrue(Home.isTextFileDisplayedInRubbishBin());
     }
 }
