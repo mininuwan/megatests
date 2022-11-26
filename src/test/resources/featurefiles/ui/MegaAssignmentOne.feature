@@ -11,8 +11,14 @@ Feature: Mega Assignment One Test
     #Then Saves the new text file
     #Then Verify a.txt is created
 
-    Scenario: Verify a.txt is deleted
-      Given The user is already logged in
-      When The user finds the text file
-      And The user delets the text file
-      Then Verify deleted file moves to the Rubbish Bin
+    #Scenario: Verify a.txt is deleted
+      #Given The user is already logged in
+      #When The user finds the text file
+      #And The user delets the text file
+      #Then Verify deleted file moves to the Rubbish Bin
+
+      Scenario: Verify a.txt can be restored to File Manager
+        Given The user is on Rubbish Bin
+        When The user finds the text file in Rubbish Bin
+        And The user can restore the text file
+        Then Verify the file is restored to File Manager

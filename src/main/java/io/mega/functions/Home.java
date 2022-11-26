@@ -24,4 +24,12 @@ public class Home {
     public static boolean isTextFileDisplayedInRubbishBin(){
         return homePage.isTextFileDisplayedInRubbishBin();
     }
+
+    public static void restoreTheDeletedFile(){
+        homePage.restoreTheDeletedFile();
+    }
+
+    public static boolean isRestoredFileDisplayedInHome(){
+        return homePage.isRestoredFileDisplayedInHome();
+    }
 }

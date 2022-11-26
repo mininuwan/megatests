@@ -107,6 +107,9 @@ public class MegaAssignmentOneSteps extends BaseAutomationPage {
         wait_MiliSec(3000);
     }
 
+
+    //----------------------------------------------------------------------
+
     @Given("The user is already logged in")
     public void theUserIsAlreadyLoggedIn() {
         wait_MiliSec(4000);
@@ -132,5 +135,32 @@ public class MegaAssignmentOneSteps extends BaseAutomationPage {
     public void verifyDeletedFileMovesToTheRubbishBin() {
         Home.navigateToRubbishBin();
         Assertions.assertTrue(Home.isTextFileDisplayedInRubbishBin());
+    }
+
+    @Given("The user is on Rubbish Bin")
+    public void theUserIsOnRubbishBin() {
+        wait_MiliSec(4000);
+        getDriver().get(Constants.ASSIGNMENT_ONE_LANDING_PAGE);
+        wait_MiliSec(10000);
+
+        Assertions.assertTrue(Landing.isLandingPageBannerDisplayed());
+        Landing.loginToApplication();
+        Assertions.assertTrue(Home.isBtnBinMenuDisplayed());
+        Home.navigateToRubbishBin();
+    }
+
+    @When("The user finds the text file in Rubbish Bin")
+    public void theUserFindsTheTextFileInRubbishBin() {
+        Assertions.assertTrue(Home.isTextFileDisplayedInRubbishBin());
+    }
+
+    @And("The user can restore the text file")
+    public void theUserCanRestoreTheTextFile() {
+        Home.restoreTheDeletedFile();
+    }
+
+    @Then("Verify the file is restored to File Manager")
+    public void verifyTheFileIsRestoredToFileManager() {
+        Assertions.assertTrue(Home.isRestoredFileDisplayedInHome());
     }
 }

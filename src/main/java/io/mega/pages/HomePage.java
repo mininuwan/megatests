@@ -16,6 +16,9 @@ public class HomePage extends BaseAutomationPage {
     private static By deletedFile = By.xpath(xRubbishFileName);
     private static By moveToBin = By.xpath("//a[@class='dropdown-item remove-item']");
     private static By btnMoveToBinYes = By.xpath("(//button[@class='mega-button positive confirm']) [1]");
+    private static By optRestore = By.xpath("//a[@class='dropdown-item revert-item']");
+    private static By restoredFile = By.xpath(xPathFileName);
+
 
     public boolean isBtnBinMenuDisplayed(){
         return getDriver().findElement(btnBinMenu).isDisplayed();
@@ -46,5 +49,21 @@ public class HomePage extends BaseAutomationPage {
     public boolean isTextFileDisplayedInRubbishBin(){
         return getDriver().findElement(deletedFile).isDisplayed();
     }
+
+    public void restoreTheDeletedFile(){
+        Actions actions = new Actions(getDriver());
+        actions.contextClick(getDriver().findElement(deletedFile)).perform();
+        wait_MiliSec(5000);
+
+        if(getDriver().findElement(optRestore).isDisplayed()){
+            getDriver().findElement(optRestore).click();
+            wait_MiliSec(10000);
+        }
+    }
+
+    public boolean isRestoredFileDisplayedInHome(){
+        return getDriver().findElement(restoredFile).isDisplayed();
+    }
+
 
 }
