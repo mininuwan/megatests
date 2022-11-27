@@ -2,6 +2,8 @@ package io.mega.pages;
 
 import io.mega.ui.BaseAutomationPage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 
 import java.io.File;
 
@@ -15,15 +17,22 @@ public class LinuxLandingPage extends BaseAutomationPage {
 
     public void navigateToLinuxTab(){
         getDriver().findElement(linuxBtn).click();
-        wait_MiliSec(2000);
+        wait_MiliSec(5000);
     }
 
     public void expandOptionList(){
         getDriver().findElement(optOS).click();
-        wait_MiliSec(2000);
+        wait_MiliSec(5000);
     }
 
     public String selectAnOS(String osName){
+        By scrolBar = By.xpath("//div[@class='ps__scrollbar-y']");
+
+        if(osName=="Fedora 34" || osName=="Fedora 37" || osName=="openSUSE Leap 15.4" || osName=="Red Hat 8"){
+            getDriver().findElement(scrolBar).sendKeys(Keys.PAGE_DOWN);
+            getDriver().findElement(scrolBar).sendKeys(Keys.PAGE_DOWN);
+        }
+
         String xPathOptionMenuOS = "//div[@data-client='" + osName + "']";
         By optMenuOS = By.xpath(xPathOptionMenuOS);
 
@@ -31,7 +40,7 @@ public class LinuxLandingPage extends BaseAutomationPage {
             String dataLink = getDriver().findElement(optMenuOS).getAttribute("data-link");
             String[] arrDataLink = dataLink.split("/");
             getDriver().findElement(optMenuOS).click();
-            wait_MiliSec(3000);
+            wait_MiliSec(5000);
 
             getDriver().findElement(btnDownload).click();
             wait_MiliSec(10000);

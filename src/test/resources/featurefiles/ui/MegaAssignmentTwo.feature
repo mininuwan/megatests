@@ -117,7 +117,6 @@ Feature: Mega Assignment Two Test
     Given The user is on linux landing page
     When The user selects Red Hat 7 and download
     Then Verify the OS is downloaded
-
   Scenario: Verify Red Hat 8 is downloadable
     Given The user is on linux landing page
     When The user selects Red Hat 8 and download
